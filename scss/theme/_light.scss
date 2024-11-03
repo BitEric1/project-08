@@ -2,8 +2,8 @@
 
 html {
     --text-color: #1a162e;
-    --icon-color: brightness(0) saturate(100%) invert(6%) sepia(30%)
-        saturate(2359%) hue-rotate(222deg) brightness(97%) contrast(94%);
+    --icon-color: brightness(0) saturate(100%) invert(6%) sepia(30%) saturate(2359%) hue-rotate(222deg) brightness(97%)
+        contrast(94%);
 
     --body-bg: #f6f6f6;
     --header-bg-color: #eee;
@@ -16,8 +16,12 @@ html {
     --dropdown-shadown-color: rgba(200, 200, 200, 0.4);
     --top-menu-border-color: #d2d1d6;
 
-    @include abstracts.breakpoint(lg) {
+    // Sidebar
+    --sidebar-bg: #fff;
+    --sidebar-shadow: rgba(200, 200, 200, 0.4);
+
+    @include abstracts.screen(lg) {
         --header-bg-color: #fff;
-        --header-shadow-color: rgba(237, 237, 246, 0.20);
+        --header-shadow-color: rgba(237, 237, 246, 0.2);
     }
 }

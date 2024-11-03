@@ -5,9 +5,15 @@
     left: 0;
     width: min(1240px, 100%);
     padding-top: 54px;
-    opacity: 0;
-    visibility: hidden;
+    // opacity: 0;
+    // visibility: hidden;
+    display: none;
     transition: 0.5s;
+
+    @include abstracts.screen(lg) {
+        position: initial;
+        padding-top: 0;
+    }
 
     &__inner {
         --inner-padding: 30px;
@@ -28,6 +34,21 @@
             translate: -50%;
             filter: var(--dropdown-arrow-color);
         }
+
+        @include abstracts.screen(lg) {
+            padding: 0 40px;
+            border-radius: 0;
+            background-color: transparent;
+            box-shadow: none;
+
+            &::before {
+                content: none;
+            }
+        }
+
+        @include abstracts.screen(sm) {
+            padding: 0 20px;
+        }
     }
 }
 
@@ -42,6 +63,12 @@
         height: var(--max-inner-height);
         border-right: 1px solid var(--top-menu-border-color);
         overflow-y: auto;
+
+        @include abstracts.screen(lg) {
+            width: 100%;
+            height: auto;
+            border-right: none;
+        }
     }
 }
 
@@ -53,14 +80,22 @@
         margin-top: 6px;
     }
 
+    @include abstracts.screen(lg) {
+        margin-top: 10px;
+    }
+
     &__icon {
         position: relative;
         flex-shrink: 0;
         width: 36px;
         height: 36px;
 
-        @include abstracts.breakpoint(xl) {
+        @include abstracts.screen(xl) {
             display: none;
+        }
+
+        @include abstracts.screen(lg) {
+            display: block;
         }
     }
 
@@ -90,10 +125,18 @@
         font-size: 1.6rem;
         font-weight: 500;
         line-height: 150%;
+
+        @include abstracts.screen(lg) {
+            margin-bottom: 26px;
+        }
     }
 
     &__list {
         margin-top: 19px;
+
+        @include abstracts.screen(lg) {
+            margin-top: 0;
+        }
     }
 
     &__list li:first-child > a {
@@ -133,7 +176,13 @@
     grid-template-columns: repeat(3, 1fr);
     gap: var(--inner-padding);
     padding-left: var(--inner-padding);
-    overflow-y: auto; 
+    overflow-y: auto;
+
+    @include abstracts.screen(lg) {
+        position: initial;
+        grid-template-columns: 1fr;
+        padding-left: 0;
+    }
 
     &--not-main {
         position: initial;
@@ -142,6 +191,11 @@
         height: var(--max-inner-height);
         padding-left: 0;
         grid-template-columns: repeat(4, 1fr);
+
+        @include abstracts.screen(lg) {
+            grid-template-columns: 1fr;
+            height: auto;
+        }
     }
 
     &li:first-child > a {
