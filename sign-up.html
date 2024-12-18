@@ -5,23 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Sign up | Grocery Mart</title>
         <!-- Favicon -->
-        <link
-            rel="icon"
-            type="image/png"
-            href="./assets/favicon/favicon-48x48.png"
-            sizes="48x48"
-        />
-        <link
-            rel="icon"
-            type="image/svg+xml"
-            href="./assets/favicon/favicon.svg"
-        />
+        <link rel="icon" type="image/png" href="./assets/favicon/favicon-48x48.png" sizes="48x48" />
+        <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
         <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+
+        <!-- Font awesome -->
         <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="./assets/favicon/apple-touch-icon.png"
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+            integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
         />
+
         <link rel="manifest" href="./assets/favicon/site.webmanifest" />
         <!-- Fonts -->
         <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
@@ -32,17 +29,23 @@
         <script src="./assets/js/script.js"></script>
     </head>
     <body>
-        <!-- Header -->
-        <header id="header"></header>
-        <script>
-            load("#header", "./template/header.html");
-        </script>
-        <!-- Main -->
-        <h1>Sign up page</h1>
-        <!-- Footer -->
-        <footer id="footer"></footer>
-        <script>
-            load("#footer", "./template/footer.html");
-        </script>
+        <main class="auth">
+            <div class="auth__intro">
+                <img src="" alt="" class="auth__intro-img" />
+                <p class="auth__intro-text">
+                    The best of luxury brand values, high quality products, and innovative services
+                </p>
+            </div>
+            <div class="auth__content">
+                <!-- Logo -->
+                <a href="./" class="logo">
+                    <img src="./assets/icons/logo.svg" alt="Grocerymart" class="logo__icon" />
+                    <h1 class="logo__title">grocerymart</h1>
+                </a>
+
+                <h1 class="auth__heading">Sign Up</h1>
+                <p class="auth__desc">Let’s create your account and Shop like a pro and save money.</p>
+            </div>
+        </main>
     </body>
 </html>

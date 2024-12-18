@@ -44,6 +44,10 @@ select {
     -webkit-tap-highlight-color: transparent;
 }
 
+input {
+    background: transparent;
+}
+
 .icon {
     filter: var(--icon-color);
 }
@@ -53,4 +57,8 @@ select {
         padding-left: 20px !important;
         padding-right: 20px !important;
     }
+}
+
+.right {
+    margin-left: auto;
 }

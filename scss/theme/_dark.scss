@@ -36,7 +36,17 @@ html.dark {
 
     // Product
     --product-card-bg: #171c28;
-    --product-card-shadow: rgba(0, 0, 0, 0.20);
+    --product-card-shadow: rgba(0, 0, 0, 0.2);
+
+    // Fliter form
+    --filter-form-bg: var(--dropdown-bg-color);
+    --filter-form-arrow-color: var(--dropdown-arrow-color);
+    --filter-form-tag-bg: #171c28;
+    --filter-form-shadow: rgba(0, 0, 0, 0.4);
+
+    // Footer
+    --footer-bg-color: #171c28;
+    --footer-text-color: #fff;
 
     @include abstracts.screen(lg) {
         --header-shadow-color: rgba(0, 0, 0, 0.2);
