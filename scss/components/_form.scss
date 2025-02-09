@@ -1,6 +1,35 @@
+@use "../abstracts";
+
 .form {
+    :has(:invalid) &__submit-btn {
+        background: #d2d1d6;
+        cursor: not-allowed;
+    }
+
+    &__row {
+        display: flex;
+        gap: 20px;
+
+        > * {
+            flex: 1;
+        }
+
+        @include abstracts.screen(md) {
+            gap: 20px;
+        }
+
+        @include abstracts.screen(sm) {
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+
     &__group {
         margin-top: 30px;
+
+        @include abstracts.screen(md) {
+            margin-top: 20px;
+        }
 
         &--inline {
             display: flex;
@@ -8,11 +37,37 @@
         }
     }
 
+    &__group:has(:invalid):has(&__input:not(:placeholder-shown)) {
+        .form__text-input {
+            border-color: #ff4d4f;
+            background: rgba($color: #ff4d4f, $alpha: 0.1);
+        }
+
+        .form__error,
+        .form__input-icon-error {
+            display: block;
+        }
+
+        .form__input-icon {
+            display: none;
+        }
+    }
+
+    &__error {
+        text-align: left;
+        margin-top: 10px;
+        color: #ff4d4f;
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 140%;
+        display: none;
+    }
+
+    &__text-area,
     &__text-input {
         display: flex;
         align-items: center;
         padding: 0 12px;
-        height: 50px;
         border-radius: 10px;
         border: 1.5px solid #d2d1d6;
 
@@ -21,20 +76,181 @@
         }
     }
 
-    &__input {
+    &__text-area {
+        height: 100px;
+        padding: 12px;
+
+        &-input {
+            resize: none;
+        }
+    }
+
+    &__text-input {
+        position: relative;
+        height: 50px;
+
+        &--small {
+            height: 42px;
+        }
+
+        @include abstracts.screen(md) {
+            height: 48px;
+        }
+    }
+
+    &__select-dialog {
+        position: absolute;
+        left: 10px;
+        bottom: 44px;
+        display: flex;
+        flex-direction: column;
+
+        opacity: 0;
+        visibility: hidden;
+        translate: 0 20px;
+        transition: opacity, visibility, translate;
+        transition-duration: 0.3s;
+
+        min-width: 200px;
+        max-height: 310px;
+        padding-bottom: 10px;
+        background: var(--form-select-dialog-bg);
+        border: 1px solid #d2d1d6;
+        border-radius: 10px;
+        box-shadow: 0 0 5px var(--form-select-dialog-shadow);
+        z-index: 1;
+
+        @include abstracts.screen(sm) {
+            position: fixed;
+            inset: 0;
+            max-width: initial;
+            max-height: initial;
+            border-radius: 0;
+        }
+
+        &.show {
+            opacity: 1;
+            visibility: visible;
+            translate: 0;
+        }
+    }
+
+    &__dialog-heading {
+        font-size: 1.8rem;
+        font-weight: 600;
+        text-align: center;
+        padding: 14px;
+    }
+
+    &__close-dialog {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 3rem;
+        padding: 2px 18px;
+        opacity: 0.8;
+    }
+
+    &__search {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        height: 38px;
+        border-bottom: 1px solid#d1d2d6;
+
+        &-input {
+            flex: 1;
+            height: 100%;
+            font-size: 1.6rem;
+        }
+
+        &-icon {
+            margin-left: 10px;
+            width: 16px;
+        }
+
+        @include abstracts.screen(lg) {
+            height: 50px;
+
+            &-icon {
+                width: 20px;
+            }
+        }
+
+        @include abstracts.screen(sm) {
+            border: 1px solid #ebebeb;
+            margin: 10px;
+            border-radius: 20px;
+
+            &-icon {
+                margin-left: 8px;
+            }
+        }
+    }
+
+    &__options-list {
         flex: 1;
+        margin-top: 10px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+
+        @supports (-webkit-touch-callout: none) {
+            padding-bottom: 300px;
+        }
+    }
+
+    &__option {
+        padding: 8px 20px;
+        font-size: 1.4rem;
+
+        @include abstracts.screen(lg) {
+            padding: 18px 20px;
+            font-size: 1.6rem;
+        }
+
+        &--current {
+            font-weight: 500;
+            background: rgba($color: #ffb700, $alpha: 0.8);
+        }
+
+        &:not(&--current):hover {
+            cursor: pointer;
+            background-color: var(--form-option-hover-bg);
+        }
+    }
+
+    &__input,
+    &__text-area-input {
+        flex: 1;
+        width: 100%;
         height: 100%;
 
         font-size: 1.8rem;
         font-weight: 500;
         line-height: 144.444%;
 
-        &-icon {
-            margin-left: 12px;
+        ::placeholder {
+            color: var(--form-placehoder-color);
         }
 
-        ::placeholder {
-            color: #d2d1d6;
+        @include abstracts.screen(md) {
+            font-size: 1.6rem;
+        }
+    }
+
+    &__input {
+        &-icon {
+            margin-left: 12px;
+
+            &-error {
+                margin-left: 12px;
+                width: 24px;
+                height: 24px;
+                object-fit: cover;
+                display: none;
+                animation: shake 0.75s;
+            }
         }
     }
 
@@ -43,15 +259,130 @@
     }
 
     &__checkbox {
+        position: relative;
         display: flex;
         align-items: center;
-        gap: 10px;
+        user-select: none;
 
         &-label {
+            margin-left: 30px;
             color: #9e9da8;
             font-size: 1.5rem;
             font-weight: 500;
             line-height: 146.667%;
+
+            @include abstracts.screen(md) {
+                font-size: 1.4rem;
+            }
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+        }
+
+        &::before {
+            width: 20px;
+            height: 20px;
+            border: 1.5px solid #9e9da8;
+            border-radius: 5px;
+            position: absolute;
+            left: 0;
+        }
+    }
+
+    &__checkbox:has(:checked) {
+        &::before {
+            background: #ffb700;
+            border-color: #ffb700;
+        }
+
+        &::after {
+            width: 15px;
+            height: 8px;
+            border: 3px solid;
+            border-color: transparent transparent #fff #fff;
+            rotate: -45deg;
+            left: 3px;
+            top: 4px;
+        }
+    }
+
+    &__label {
+        display: block;
+        font-size: 2.2rem;
+        font-weight: 500;
+        line-height: 145.455%;
+
+        &--medium {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 500;
+            line-height: 144.444%;
+        }
+
+        &--small {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+            line-height: 142.857%;
+        }
+    }
+
+    &__select-wrap {
+        display: flex;
+        align-items: center;
+        height: 45px;
+        border-radius: 6px;
+        border: 1px solid #d2d1d6;
+    }
+
+    &__select {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: var(--width, 108px);
+        padding: 0 14px;
+        height: calc(100% - 10px);
+
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 142.857%;
+
+        @include abstracts.screen(xl) {
+            flex: 1;
+        }
+    }
+
+    &__select + &__select {
+        border-left: 1px solid #d2d1d6;
+    }
+
+    &__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+
+        @include abstracts.screen(sm) {
+            gap: 10px;
+        }
+    }
+
+    &__tag {
+        padding: 6px 12px;
+        border-radius: 6px;
+        color: #9e9da8;
+        background: var(--form-tag-bg);
+
+        font-size: 1.4rem;
+        font-weight: 500;
+        line-height: 142.857%;
+
+        transition: color 0.2s;
+
+        &:hover {
+            color: var(--text-color);
         }
     }
 }
